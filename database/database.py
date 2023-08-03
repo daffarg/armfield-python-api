@@ -54,7 +54,7 @@ class Database:
             if not self.__conn:
                 self.__open_connection()
                 
-            with self.__conn.cursor() as cursor:
+            with self.__conn.cursor(pymysql.cursors.DictCursor) as cursor:
                 cursor.execute(query)
                 if 'SELECT' in query.upper():
                     result = cursor.fetchall()
@@ -68,3 +68,15 @@ class Database:
             raise pymysql.MySQLError(f'Failed to execute query due to: {sqle}')
         except Exception as e:
             raise Exception(f'An exception occured due to: {e}')
+        
+    def get_latest_T1_value(self):
+        query = "SELECT value, predicted_at FROM t1_prediction ORDER BY predicted_at DESC LIMIT 1"
+        return self.run_query(query)
+        
+    def get_latest_T2_value(self):
+        query = "SELECT value, predicted_at FROM t2_prediction ORDER BY predicted_at DESC LIMIT 1"
+        return self.run_query(query)
+        
+    def get_latest_F1_value(self):
+        query = "SELECT value, predicted_at FROM f1_prediction ORDER BY predicted_at DESC LIMIT 1"
+        return self.run_query(query)
