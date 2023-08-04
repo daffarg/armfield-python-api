@@ -1,8 +1,13 @@
-from flask import Flask, Blueprint, jsonify
+from flask import Flask, Blueprint, abort
 from flask_cors import CORS
-from database.database import Database
 from dotenv import load_dotenv
+from http import HTTPStatus
+
+from database.database import Database
+from util.response import get_latest_prediction_response, get_data_not_found_response
+
 import os
+import pymysql
 
 load_dotenv()
 
@@ -15,29 +20,50 @@ def create_app():
     app.register_blueprint(bp, url_prefix='/api')
     return app
 
-def get_response_msg(data, status_code):
-    message = {
-        'status': status_code,
-        'data': data if data else 'No records found'
-    }
-    response_msg = jsonify(message)
-    response_msg.status_code = status_code
-    return response_msg
-
 db = Database()
 bp = Blueprint('api', __name__)
 
-@bp.route("/get-latest-t1")
+@bp.route("/v1/get-latest-t1", methods=['GET'])
 def get_latest_t1():
-    return "<p>T1 Value</p>"
+    try:
+        latest_T1_value = db.get_latest_T1_value()
+        db.close_connection()
+        if not latest_T1_value:
+            return get_data_not_found_response()
+        response = get_latest_prediction_response(latest_T1_value)
+        return response
+    except pymysql.MySQLError as sqle:
+        abort(HTTPStatus.INTERNAL_SERVER_ERROR, description=str(sqle))
+    except Exception as e:
+        abort(HTTPStatus.BAD_REQUEST, description=str(e))
 
-@bp.route("/get-latest-t2")
+
+@bp.route("/v1/get-latest-t2", methods=['GET'])
 def get_latest_t2():
-    return "<p>T2 Value</p>"
+    try:
+        latest_T2_value = db.get_latest_T2_value()
+        db.close_connection()
+        if not latest_T2_value:
+            return get_data_not_found_response()
+        response = get_latest_prediction_response(latest_T2_value)
+        return response
+    except pymysql.MySQLError as sqle:
+        abort(HTTPStatus.INTERNAL_SERVER_ERROR, description=str(sqle))
+    except Exception as e:
+        abort(HTTPStatus.BAD_REQUEST, description=str(e))
 
-@bp.route("/get-latest-f1")
+@bp.route("/v1/get-latest-f1", methods=['GET'])
 def get_latest_f1():
-    return "<p>F1 Value</p>"
+    try:
+        latest_F1_value = db.get_latest_F1_value()
+        if not latest_F1_value:
+            return get_data_not_found_response()
+        response = get_latest_prediction_response(latest_F1_value)
+        return response
+    except pymysql.MySQLError as sqle:
+        abort(HTTPStatus.INTERNAL_SERVER_ERROR, description=str(sqle))
+    except Exception as e:
+        abort(HTTPStatus.BAD_REQUEST, description=str(e))
 
 app = create_app()
 
