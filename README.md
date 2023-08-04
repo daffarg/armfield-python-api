@@ -1,4 +1,4 @@
-# Armfield Prediciton API
+# Armfield Prediction API
 > This is an API for armfield project (Miniplant Monitoring System) to get machine learning prediction value. This project is developed for Inkubator IT HMIF
 
 ## Table of Contents
