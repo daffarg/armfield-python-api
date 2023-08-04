@@ -1,4 +1,4 @@
-from flask import Flask, Blueprint, jsonify, abort
+from flask import Flask, Blueprint, abort
 from flask_cors import CORS
 from dotenv import load_dotenv
 from http import HTTPStatus
@@ -30,7 +30,7 @@ def get_latest_t1():
         db.close_connection()
         if not latest_T1_value:
             return get_data_not_found_response()
-        response = get_latest_prediction_response(latest_T1_value,  HTTPStatus.OK)
+        response = get_latest_prediction_response(latest_T1_value)
         return response
     except pymysql.MySQLError as sqle:
         abort(HTTPStatus.INTERNAL_SERVER_ERROR, description=str(sqle))
@@ -45,7 +45,7 @@ def get_latest_t2():
         db.close_connection()
         if not latest_T2_value:
             return get_data_not_found_response()
-        response = get_latest_prediction_response(latest_T2_value,  HTTPStatus.OK)
+        response = get_latest_prediction_response(latest_T2_value)
         return response
     except pymysql.MySQLError as sqle:
         abort(HTTPStatus.INTERNAL_SERVER_ERROR, description=str(sqle))
@@ -58,7 +58,7 @@ def get_latest_f1():
         latest_F1_value = db.get_latest_F1_value()
         if not latest_F1_value:
             return get_data_not_found_response()
-        response = get_latest_prediction_response(latest_F1_value,  HTTPStatus.OK)
+        response = get_latest_prediction_response(latest_F1_value)
         return response
     except pymysql.MySQLError as sqle:
         abort(HTTPStatus.INTERNAL_SERVER_ERROR, description=str(sqle))
