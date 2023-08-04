@@ -17,7 +17,9 @@
 ## Features
 ### Get Latest T1 Value
 Path: 
-```/api/v1/get-latest-t1```
+```
+/api/v1/get-latest-t1
+```
 Example Response: 
 ```
 {
@@ -32,7 +34,9 @@ Example Response:
 
 ### Get Latest T2 Value
 Path: 
-```/api/v1/get-latest-t2```
+```
+/api/v1/get-latest-t2
+```
 Example Response: 
 ```
 {
@@ -47,7 +51,9 @@ Example Response:
 
 ### Get Latest F1 Value
 Path: 
-```/api/v1/get-latest-f1```
+```
+/api/v1/get-latest-f1
+```
 Example Response: 
 ```
 {
@@ -69,13 +75,22 @@ Example Response:
 ## Usage
 1. Navigate to the root directory of this project
 2. Activate the virtual environment. Detail can be read [_here_](https://flask.palletsprojects.com/en/2.3.x/installation/#activate-the-environment)
-2. Install the required dependencies using ```pip install -r requirements.txt```
+2. Install the required dependencies using this command:
+```
+pip install -r requirements.txt
+```
 3. Create new database in your MySQL
-4. Import the sql dump file that located in `sql` folder into your new database that already created in step 3 using ```mysql -u {your username} -p {your database name} < armfield_api.sql```
+4. Import the sql dump file that located in `sql` folder into your new database that already created in step 3 using this command:
+```
+mysql -u {your username} -p {your database name} < armfield_api.sql
+```
 5. Create new `.env` file in root directory (copy the content of `.env.example` file) and set your local environment variable
-5. Start the server using ```py app.py```
+5. Start the server using this command:
+```
+py app.py
+```
 
 
 ## Contact
-Mohamad Daffa Argakoesoemah
+Mohamad Daffa Argakoesoemah<br />
 13520118@std.stei.itb.ac.id
