@@ -16,9 +16,10 @@
 
 ## Features
 ### Get Latest T1 Value
-Path: `/api/v1/get-latest-t1`
+Path: 
+```/api/v1/get-latest-t1```
 Example Response: 
-`
+```
 {
     "data": {
         "predicted_at": "Fri, 04 Aug 2023 08:24:17 GMT",
@@ -27,12 +28,13 @@ Example Response:
     "message": "success",
     "status": 200
 }
-`
+```
 
 ### Get Latest T2 Value
-Path: `/api/v1/get-latest-t2`
+Path: 
+```/api/v1/get-latest-t2```
 Example Response: 
-`
+```
 {
     "data": {
         "predicted_at": "Fri, 04 Aug 2023 08:24:17 GMT",
@@ -41,12 +43,13 @@ Example Response:
     "message": "success",
     "status": 200
 }
-`
+```
 
 ### Get Latest F1 Value
-Path: `/api/v1/get-latest-f1`
+Path: 
+```/api/v1/get-latest-f1```
 Example Response: 
-`
+```
 {
     "data": {
         "predicted_at": "Fri, 04 Aug 2023 08:24:17 GMT",
@@ -55,7 +58,7 @@ Example Response:
     "message": "success",
     "status": 200
 }
-`
+```
 
 
 ## Setup
@@ -66,11 +69,11 @@ Example Response:
 ## Usage
 1. Navigate to the root directory of this project
 2. Activate the virtual environment. Detail can be read [_here_](https://flask.palletsprojects.com/en/2.3.x/installation/#activate-the-environment)
-2. Install the required dependencies using `pip install -r requirements.txt`
+2. Install the required dependencies using ```pip install -r requirements.txt```
 3. Create new database in your MySQL
-4. Import the sql dump file that located in `sql` folder into your new database that already created in step 3 using `mysql -u {your username} -p {your database name} < armfield_api.sql`
+4. Import the sql dump file that located in `sql` folder into your new database that already created in step 3 using ```mysql -u {your username} -p {your database name} < armfield_api.sql```
 5. Create new `.env` file in root directory (copy the content of `.env.example` file) and set your local environment variable
-5. Start the server using `py app.py`
+5. Start the server using ```py app.py```
 
 
 ## Contact
